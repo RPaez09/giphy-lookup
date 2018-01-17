@@ -22,6 +22,13 @@ body {
     background-color: #FFFFFF;
 }
 
+.section .heading {
+    font-weight: bold;
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
 .main {
     display: flex;
     justify-content: space-around;
