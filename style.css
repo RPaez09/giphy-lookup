@@ -73,10 +73,18 @@ body {
     height: 44px;
 }
 
+.del-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    cursor: pointer;
+}
+
 .query-wrapper {
     margin-top: 25px;
 }
 
 .query-item { 
+    position: relative;
     padding: 20px 15px;
 }

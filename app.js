@@ -21,7 +21,7 @@ var app = {
             var newHTML = '';
 
             for( var i = 0; i < app.subjects.store.length; i++ ){
-                newHTML += '<div class="button query-item">'+ app.subjects.store[i] +'</div>';
+                newHTML += '<div class="button query-item">'+ app.subjects.store[i] +'<div class="del-btn" data-index="'+ i +'">X</div></div>';
             }
 
             this.element.innerHTML = newHTML;
