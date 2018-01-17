@@ -35,6 +35,31 @@ var app = {
 
     },
 
+    results : {
+        createQuery : function( subject ){
+            return "https://api.giphy.com/v1/gifs/search?api_key=fNmH3bq6TtGUIEPZLAotDnsoCRR2aHuN&q="+ subject +"&limit=10&offset=0&rating=G&lang=en"
+        },
+
+        makeRequest : function( query ){
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open('GET' , this.createQuery("the office") );
+
+            xhr.send(null);
+
+            xhr.onreadystatechange = function(){
+                if( xhr.readyState === 4 ) { //request done
+                    if( xhr.status === 200 ){
+                        console.log( xhr.response );
+                    } else {
+                        console.error('Error: ' + xhr.status + ' an error occurred during the request made to the server.');
+                    }
+                }
+            };
+
+        }
+    },
+
     startUp : function(){
         this.subjects.render();
 
