@@ -6,6 +6,16 @@ var app = {
 
         element: document.getElementsByClassName('query-wrapper')[0],
 
+        add: function( newSubject ){
+            this.store.unshift( newSubject );
+            this.render();
+        },
+
+        remove: function( index ){
+            this.store.splice( index , 1 );
+            this.render();
+        },
+
         render: function(){
             
             var newHTML = '';
