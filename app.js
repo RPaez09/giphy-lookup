@@ -6,9 +6,14 @@ var app = {
 
         element: document.getElementsByClassName('query-wrapper')[0],
 
-        add: function( newSubject ){
-            this.store.unshift( newSubject );
-            this.render();
+        inputBox: document.getElementsByClassName('search-box')[0],
+
+        add: function( ){
+            if( this.inputBox.value != "" ){
+                this.store.unshift( this.inputBox.value );
+                this.inputBox.value = "";
+                this.render();
+            }
         },
 
         remove: function( index ){
@@ -39,7 +44,18 @@ var app = {
                 app.subjects.remove( e.target.attributes['data-index'].value );
             };
         });
-        
+
+        //events for adding an item to the queries
+        document.getElementsByClassName( 'search-btn' )[0].addEventListener('click' , function(e){
+            app.subjects.add();
+        });
+
+        document.getElementsByClassName( 'search-box' )[0].addEventListener('keyup' , function(e){
+            if( e.which === 13 ){ // on enter key
+                app.subjects.add();
+            }
+        });
+
     }
 
 }
