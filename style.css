@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #121212;
+    box-sizing: border-box;
 }
 
 .header {
@@ -43,4 +44,25 @@ body {
     width: 20%;
 }
 
-/* #6d63ff */
+.search .search-box , .search .search-btn {
+    display: inline-block;
+    padding: 5px;
+}
+
+.search-box {
+    width: 80%;
+    height: 40px;
+}
+
+.search-btn {
+    background-color: #6d63ff;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 30px;
+    width: 10%;
+    text-align: center;
+    position: relative;
+    top: 6px;
+    line-height: 44px;
+    height: 44px;
+}
