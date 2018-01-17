@@ -32,6 +32,14 @@ var app = {
 
     startUp : function(){
         this.subjects.render();
+
+        // event delegation for deleting an item from the queries
+        document.getElementsByClassName( 'query-wrapper' )[0].addEventListener( 'click' , function( e ){ 
+            if( e.target.matches('.del-btn') ){
+                app.subjects.remove( e.target.attributes['data-index'].value );
+            };
+        });
+        
     }
 
 }
