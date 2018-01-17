@@ -27,7 +27,7 @@ body {
     font-weight: bold;
     text-align: center;
     font-size: 26px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .main {
@@ -54,15 +54,29 @@ body {
     height: 40px;
 }
 
-.search-btn {
+.button {
     background-color: #6d63ff;
     color: #FFFFFF;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.search-btn {
     width: 10%;
+    font-size: 30px;
     text-align: center;
     position: relative;
     top: 6px;
     line-height: 44px;
     height: 44px;
+}
+
+.query-wrapper {
+    margin-top: 25px;
+}
+
+.query-item { 
+    padding: 20px 15px;
 }
