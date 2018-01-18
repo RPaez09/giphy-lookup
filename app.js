@@ -55,6 +55,8 @@ var app = {
 
         activeIndex : null,
 
+        activeElement : null,
+
         element: document.getElementsByClassName('result-wrapper')[0],
 
         createQuery : function( subject ){
@@ -105,6 +107,8 @@ var app = {
                 app.subjects.activeIndex = parseInt(e.target.attributes['data-index'].value);
                 app.subjects.render();
                 app.results.makeRequest( e.target.attributes['data-value'].value );
+                app.results.activeIndex = null; // reset the current active index since a new gif set is produced
+                app.results.activeElement = null;
             };
         });
 
@@ -121,14 +125,23 @@ var app = {
         });
 
         document.getElementsByClassName('result-wrapper')[0].addEventListener('click' , function(e){
+            // event for when a gif is clicked
             if( e.target.matches('img') ){
                 var newIndex = parseInt( e.target.parentNode.attributes['data-index'].value ); // get the new index
-                if( app.results.activeIndex === newIndex ){ //if clicking an already active gif
-                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height_still.url; // switch to the still image
-                    app.results.activeIndex = null;
-                } else {
-                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url; //switch to a gif
+                if( app.results.activeIndex === null ){
+                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url; // switch to a gif
                     app.results.activeIndex = newIndex; // switch to the new index
+                    app.results.activeElement = e.target; // lets save the element reference for switching the gif to a stll image later
+                }
+                else if( app.results.activeIndex === newIndex ){ // if clicking an already active gif
+                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height_still.url; // switch to the still image
+                    app.results.activeIndex = null; // reset active index
+                    app.results.activeElement = null; // reset active element
+                } else {
+                    app.results.activeElement.attributes.src.value = app.results.store[ app.results.activeIndex ].images.fixed_height_still.url;
+                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url; // switch to a gif
+                    app.results.activeIndex = newIndex; // switch to the new index
+                    app.results.activeElement = e.target;
                 }
             }
         });
