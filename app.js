@@ -1,6 +1,8 @@
 var app = {
     
     subjects : {
+
+        activeIndex : null,
         
         store: ['coding' , 'drifting' , 'wine' , 'biking' , 'stunt' , 'skydive' , 'samoyed' , 'the office'],
 
@@ -12,12 +14,18 @@ var app = {
             if( this.inputBox.value != "" ){
                 this.store.unshift( this.inputBox.value );
                 this.inputBox.value = "";
+                this.activeIndex++;
                 this.render();
             }
         },
 
         remove: function( index ){
             this.store.splice( index , 1 );
+            if( index === this.activeIndex ){
+                this.activeIndex = null;
+            }else if( index < this.activeIndex ){
+                this.activeIndex--;
+            }
             this.render();
         },
 
@@ -26,7 +34,13 @@ var app = {
             var newHTML = '';
 
             for( var i = 0; i < app.subjects.store.length; i++ ){
-                newHTML += '<div class="button query-item" data-index="' + i + '" data-value="' + app.subjects.store[i] + '">'+ app.subjects.store[i] +'<div class="del-btn">X</div></div>';
+                newHTML += '<div class="button query-item';
+                
+                if( i === this.activeIndex ){
+                    newHTML += ' active';
+                }
+                
+                newHTML += '" data-index="' + i + '" data-value="' + app.subjects.store[i] + '">'+ app.subjects.store[i] +'<div class="del-btn">X</div></div>';
             }
 
             this.element.innerHTML = newHTML;
@@ -86,6 +100,8 @@ var app = {
 
             } else if( e.target.matches('.query-item') ){
                 // event for making requests when a subject is clicked
+                app.subjects.activeIndex = parseInt(e.target.attributes['data-index'].value);
+                app.subjects.render();
                 app.results.makeRequest( e.target.attributes['data-value'].value );
             };
         });
