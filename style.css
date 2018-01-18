@@ -89,3 +89,14 @@ body {
     position: relative;
     padding: 20px 15px;
 }
+
+.result-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.search-result {
+    margin-bottom: 25px;
+}
