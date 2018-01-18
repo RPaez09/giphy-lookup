@@ -26,7 +26,7 @@ var app = {
             var newHTML = '';
 
             for( var i = 0; i < app.subjects.store.length; i++ ){
-                newHTML += '<div class="button query-item">'+ app.subjects.store[i] +'<div class="del-btn" data-index="'+ i +'">X</div></div>';
+                newHTML += '<div class="button query-item" data-index="' + i + '" data-value="' + app.subjects.store[i] + '">'+ app.subjects.store[i] +'<div class="del-btn">X</div></div>';
             }
 
             this.element.innerHTML = newHTML;
@@ -55,7 +55,8 @@ var app = {
             xhr.onreadystatechange = function(){
                 if( xhr.readyState === 4 ) { //request done
                     if( xhr.status === 200 ){
-                        app.results.store = xhr.response.data;
+                        app.results.store = ( JSON.parse( xhr.response ) ).data;
+                        app.results.render();
                     } else {
                         console.error('Error: ' + xhr.status + ' an error occurred during the request made to the server.');
                     }
@@ -65,21 +66,26 @@ var app = {
         },
 
         render : function(){
-            var outputHTML = '';
+            var newHTML = '';
 
             for(var i = 0; i < this.store.length; i++){
-
+                newHTML += '<div class="search-result" data-index="'+ i +'"><img src="'+ this.store[i].images.fixed_width_still.url +'"/></div>'
             }
+
+            this.element.innerHTML = newHTML;
         }
     },
 
     startUp : function(){
         this.subjects.render();
 
-        // event delegation for deleting an item from the queries
         document.getElementsByClassName( 'query-wrapper' )[0].addEventListener( 'click' , function( e ){ 
             if( e.target.matches('.del-btn') ){
-                app.subjects.remove( e.target.attributes['data-index'].value );
+                // event delegation for deleting an item from the queries
+                app.subjects.remove( e.target.parentNode.attributes['data-index'].value );
+
+            } else if( e.target.matches('.query-item') ){
+                app.results.makeRequest( e.target.attributes['data-value'].value );
             };
         });
 
@@ -93,9 +99,7 @@ var app = {
                 app.subjects.add();
             }
         });
-
     }
-
-}
+};
 
 app.startUp();
