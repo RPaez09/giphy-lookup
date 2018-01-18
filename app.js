@@ -122,9 +122,14 @@ var app = {
 
         document.getElementsByClassName('result-wrapper')[0].addEventListener('click' , function(e){
             if( e.target.matches('img') ){
-                var newIndex = e.target.parentNode.attributes['data-index'].value;
-                e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url;
-                console.log(e.target.attributes.src.value + " " + newIndex);
+                var newIndex = parseInt( e.target.parentNode.attributes['data-index'].value ); // get the new index
+                if( app.results.activeIndex === newIndex ){ //if clicking an already active gif
+                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height_still.url; // switch to the still image
+                    app.results.activeIndex = null;
+                } else {
+                    e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url; //switch to a gif
+                    app.results.activeIndex = newIndex; // switch to the new index
+                }
             }
         });
     }
