@@ -53,6 +53,8 @@ var app = {
 
         store : [],
 
+        activeIndex : null,
+
         element: document.getElementsByClassName('result-wrapper')[0],
 
         createQuery : function( subject ){
@@ -115,6 +117,14 @@ var app = {
             // same as above but on enter key being pressed
             if( e.which === 13 ){
                 app.subjects.add();
+            }
+        });
+
+        document.getElementsByClassName('result-wrapper')[0].addEventListener('click' , function(e){
+            if( e.target.matches('img') ){
+                var newIndex = e.target.parentNode.attributes['data-index'].value;
+                e.target.attributes.src.value = app.results.store[ newIndex ].images.fixed_height.url;
+                console.log(e.target.attributes.src.value + " " + newIndex);
             }
         });
     }
