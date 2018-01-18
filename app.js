@@ -85,17 +85,19 @@ var app = {
                 app.subjects.remove( e.target.parentNode.attributes['data-index'].value );
 
             } else if( e.target.matches('.query-item') ){
+                // event for making requests when a subject is clicked
                 app.results.makeRequest( e.target.attributes['data-value'].value );
             };
         });
 
-        //events for adding an item to the queries
         document.getElementsByClassName( 'search-btn' )[0].addEventListener('click' , function(e){
+            // event for adding an item to the queries
             app.subjects.add();
         });
 
         document.getElementsByClassName( 'search-box' )[0].addEventListener('keyup' , function(e){
-            if( e.which === 13 ){ // on enter key
+            // same as above but on enter key being pressed
+            if( e.which === 13 ){
                 app.subjects.add();
             }
         });
