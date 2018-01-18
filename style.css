@@ -4,6 +4,7 @@ body {
     box-sizing: border-box;
 }
 
+/** heading **/
 .header {
     height: 50px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -17,6 +18,7 @@ body {
     line-height: 50px;
 }
 
+/** general **/
 .section {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: 30px;
@@ -40,6 +42,7 @@ body {
     width: 70%;
 }
 
+/** subject **/
 .search {
     width: 20%;
 }
@@ -81,6 +84,7 @@ body {
     cursor: pointer;
 }
 
+/** results **/
 .query-wrapper {
     margin-top: 25px;
 }
