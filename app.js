@@ -69,7 +69,7 @@ var app = {
             var newHTML = '';
 
             for(var i = 0; i < this.store.length; i++){
-                newHTML += '<div class="search-result" data-index="'+ i +'"><img src="'+ this.store[i].images.fixed_width_still.url +'"/></div>'
+                newHTML += '<div class="search-result" data-index="'+ i +'"><img src="'+ this.store[i].images.fixed_height_still.url +'"/></div>'
             }
 
             this.element.innerHTML = newHTML;
